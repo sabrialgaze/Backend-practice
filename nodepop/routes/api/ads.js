@@ -31,8 +31,19 @@ router.get('/', async (req, res, next) => {
         };
 
         
-        if (price) { 
-            filter.price = price;
+        if (price) { // /api/ads?price=100-1500
+            if (price.includes('-')) {
+                const prices = price.split('-');
+                if(prices[0] === ''){
+                    filter.price = {$lte: prices[1]};
+                } else if (prices[1] === ''){
+                    filter.price = {$gte: prices[0]};
+                } else {
+                    filter.price = {$gte: prices[0], $lte: prices[1]};
+                };
+            }else{
+                filter.price = price;
+            };
         };
 
         if (tags) { // /api/ads?tags=motor
