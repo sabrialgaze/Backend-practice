@@ -13,10 +13,10 @@ router.get('/', async (req, res, next) => {
         const price = req.query.price;
         const tags = req.query.tags;
 
-        const skip = req.query.skip;
+        const skip = req.query.skip; // /api/ads?skip=1&limit=2
         const limit = req.query.limit;
 
-        const fields = req.query.fields; 
+        const fields = req.query.fields;  // /api/ads?fields=price
 
         const sort = req.query.sort; // /api/ads?sort=name
 
@@ -69,7 +69,7 @@ router.get('/tags', async (req, res, next) => {
     }
 });
 
-// POST /api/ads (body=agenteData)
+// POST /api/ads (body=adData)
 // create an ad
 router.post('/', async (req, res, next) => {
     try {
